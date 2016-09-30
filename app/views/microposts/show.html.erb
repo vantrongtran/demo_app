@@ -1,0 +1,19 @@
+<% provide(:title, "Micropost") %>
+<div class="row">
+  <div class="microposts">
+    <%=render @micropost%>
+  <div>
+    <% if @micropost.comments.any?%>
+      <div class="comment">
+        <h4>Comment (<%= @micropost.comments.count %>)
+        <ol >
+          <%= render @micropost.comments %>
+        </ol>
+      <div class="comment">
+    <% end %>
+    <% if logged_in? %>
+      <%= render 'shared/comment_form'%>
+    <% end %>
+  </div>
+  </div>
+</div>
