@@ -25,10 +25,21 @@ class MicropostsController < ApplicationController
   end
 
   def index
-	@microposts = Micropost.paginate(page: params[:page],:per_page => 10)
+	  @microposts = Micropost.paginate(page: params[:page],:per_page => 10)
   end
 
-  def load_micropost
+  def edit
+    @micropost = Micropost.find_by id: params[:id]
+  end
+
+  def update
+    @micropost = Micropost.find_by id: params[:id]
+    if @micropost.update_attributes(microposts_params)
+      flash[:success] = "Update success!"
+      redirect_to @micropost
+      else
+        render 'edit'
+    end
   end
 
   private 

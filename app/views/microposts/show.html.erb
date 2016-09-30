@@ -2,13 +2,14 @@
 <div class="row">
   <div class="microposts">
     <%=render @micropost%>
+    <%if current_user == @micropost.user%>
+    <%= link_to "Edit", edit_micropost_path(@micropost) %></li>
+    <%end%>
   <div>
     <% if @micropost.comments.any?%>
       <div class="comment">
         <h4>Comment (<%= @micropost.comments.count %>)
-        <ol >
           <%= render @micropost.comments %>
-        </ol>
       <div class="comment">
     <% end %>
     <% if logged_in? %>
